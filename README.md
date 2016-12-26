@@ -10,5 +10,6 @@ make
 
 ** BUILD lru 
 ```
-gcc -I./deps/src -L./deps/build/.libs -o lru lru.c
+//gcc -I./deps/src -L./deps/build/.libs -o lru lru.c
+gcc -I./deps/src -L. -lhl -o lru lru.c
 ```

@@ -10,6 +10,6 @@ typedef struct {
 
 cache2 * create_cache();
 
-void set(cache2 * cache, char * key, char ** value, int valueLen);
+void set(cache2 * cache, char * key, char * value, int valueLen);
 
-bool get(cache2 * cache, char * key, char ** value);
+bool get(cache2 * cache, char * key, char * value);
