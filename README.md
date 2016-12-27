@@ -6,6 +6,8 @@ cd ./deps/ && autoreconf --install
 cd build
 ../configure
 make
+cp ./build/libhl.a ../
+cd .. && cd ..
 ```
 
 ** BUILD lru 
