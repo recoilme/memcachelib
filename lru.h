@@ -1,15 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <linklist.h>
 #include <hashtable.h>
 
 typedef struct {
     linked_list_t* list;
-    hashtable_t* table; 
+    hashtable_t* table;
+    size_t capacity;
 } memcache;
 
-memcache * create_cache();
+memcache * create_cache(size_t capacity);
 
-void set(memcache * cache, char * key, char ** value, int valueLen);
+int set(memcache * cache, char * key, char ** value, int valueLen);
 
-bool get(memcache * cache, char * key, char * value);
+size_t get(memcache * cache, char * key, char ** value);
+
+void destroy(memcache * cache);
