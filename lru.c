@@ -2,31 +2,32 @@
 #include <linklist.h>
 
 //gcc -I./deps/src -L./deps/build/.libs -o lru lru.c
-cache2 p = {NULL,NULL};
+memcache cacheholder;
 
 int main(int argc, char **argv) {
-    printf("hello\n");
-    cache2 *c = create_cache();
-    char * v = "34\0";
-    set(c,"1",v,3);
+    memcache * cache;
+    cache = create_cache();
+    char *v = "3434";
+    set(cache,"1",&v,4);
+    char *vv = "";
+    get(cache,"1",vv);
+    printf("val_main:%s\n",vv);
 }
 
 
-cache2 * create_cache() {
-    p.list = list_create();
-    return &p;
+memcache * create_cache() {
+    cacheholder.list = list_create();
+    cacheholder.table = ht_create(256, 0, NULL);
+    return &cacheholder;
 }
 
-void set(cache2 * cache, char * key, char * value, int valueLen) {
-    printf("Set key:%s\n",key);
-    printf("Set val:%s\n",value);
-    //char *a = malloc((valueLen+1) * sizeof(char));
-    //a = &value[1];
-    //printf("size %d\n",sizeof(a));
-    //printf("Set val:%s\n",&a);
+void set(memcache * cache, char * key, char ** value, int valueLen) {
+    ht_set(cache->table, key, sizeof(key), *value, valueLen);
 }
 
-bool get(cache2 * cache, char * key, char * value) {
-    printf("Get cache\n");
+bool get(memcache * cache, char * key, char * value) {
+    size_t dlen;
+    value = ht_get(cache->table, key, sizeof(key),&dlen);
+    printf("val:%.*s\n",(int)dlen,value);
     return false;
 }

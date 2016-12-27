@@ -6,10 +6,10 @@
 typedef struct {
     linked_list_t* list;
     hashtable_t* table; 
-} cache2;
+} memcache;
 
-cache2 * create_cache();
+memcache * create_cache();
 
-void set(cache2 * cache, char * key, char * value, int valueLen);
+void set(memcache * cache, char * key, char ** value, int valueLen);
 
-bool get(cache2 * cache, char * key, char * value);
+bool get(memcache * cache, char * key, char * value);
