@@ -116,7 +116,7 @@ int set(memcache * cache, char * key, char ** value, int valueLen) {
         return res;
     }
     else {
-        res = ht_set(cache->table, key, sizeof(key), *value, valueLen);
+        res = ht_set_copy(cache->table, key, sizeof(key), *value, valueLen,NULL,NULL);
         if (res == 0) {
             res = trimtosize(cache);
         }
